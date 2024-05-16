@@ -20,7 +20,7 @@ export default function TextForm(props) {
     let text = document.getElementById("myText");
     text.select();
     navigator.clipboard.writeText(text.value);
-	props.showAlert("Copied to clipboard","success")
+    props.showAlert("Copied to clipboard", "success");
   };
 
   const removeExtraSpaces = () => {
@@ -32,12 +32,12 @@ export default function TextForm(props) {
       <div
         className="mb-3 container"
         style={{
-          color : props.mode === "dark" ? "white" : "black",
+          color: props.mode === "dark" ? "yellow" : "black",
         }}
       >
         <h1
           style={{
-            color : props.mode === "dark" ? "white" : "black",
+            color: props.mode === "dark" ? "lightyellow" : "black",
           }}
         >
           {props.heading}{" "}
@@ -50,31 +50,33 @@ export default function TextForm(props) {
           value={text}
           onChange={handleChange}
           style={{
-            backgroundColor: props.mode === "dark" ? "grey" : "white",
-			color: props.mode==='dark'? "white": "black"
+            backgroundColor: props.mode === "dark" ? "#101010" : "white",
+            color: props.mode === "dark" ? "white" : "black",
           }}
         ></textarea>
-        <button className="btn btn-primary mx-3" onClick={handleClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-3 my-3" onClick={handleClick}>
           Convert to UpperCase
         </button>
-        <button className="btn btn-primary mx-3" onClick={handleClear}>
+        <button disabled={text.length===0} className="btn btn-primary mx-3 my-3" onClick={handleClear}>
           Clear
         </button>
-        <button className="btn btn-primary mx-3" onClick={removeExtraSpaces}>
+        <button disabled={text.length===0} className="btn btn-primary mx-3 my-3" onClick={removeExtraSpaces}>
           RemoveExtraSpace
         </button>
-        <button className="btn btn-primary" onClick={handleCopy}>
+        <button disabled={text.length===0} className="btn btn-primary mx-3 my-3" onClick={handleCopy}>
           Copy
         </button>
       </div>
-      <div className="container my-5"
-	  style={{
-		color : props.mode === "dark" ? "white" : "black",
-	  }}>
+      <div
+        className="container my-5"
+        style={{
+          color: props.mode === "dark" ? "white" : "black",
+        }}
+      >
         <h1>Your text Summary</h1>
         <p>
           {text.length} characters <br />
-          {text.split(" ").length} words <br />
+          {text.split(" ").filter((x)=>{return x.length!==0}).length} words <br />
           <h2>Preview</h2>
           <p>{text}</p>
         </p>
